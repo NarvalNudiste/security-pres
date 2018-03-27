@@ -38,19 +38,16 @@
 * Payload
   * Ce qu'il fait, pas forcément méchant ça dépends du but
 * Phases correspondantes
-
-### Phases
-
-* Phase dormante
-  * Dormante : Le virus a réussi à s'introduire, mais il fait rien
-  * tous les virus n'ont pas cette phase
-  * on attends le trigger
-* Phase de propagation
-  * Insère une copie de lui-même dans des autres softs, logiquement
-  * Chaque programme infecté contient un clone du virus, on appelle ça la phase de propagation
-  * Trigger + exec à peu près la même chose, c'est quand ça fout la merde
-* Phase de trigger
-* Phase d'execution
+  * Phase dormante
+    * Dormante : Le virus a réussi à s'introduire, mais il fait rien
+    * tous les virus n'ont pas cette phase
+    * on attends le trigger
+  * Phase de propagation
+    * Insère une copie de lui-même dans des autres softs, logiquement
+    * Chaque programme infecté contient un clone du virus, on appelle ça la phase de propagation
+  * Phase de trigger
+  * Phase d'execution
+      * Trigger + exec à peu près la même chose, c'est quand ça fout la merde
 
 
 ### Types de virus
@@ -58,14 +55,25 @@
 * Resident / Non-résident
   * Résident : Memory resident virus, reste dans la ram depuis le boot de la machine jusqu'à qu'on l'éteigne .. Peut intercepter des demandes de l'os et changer le flow au module de réplication (???????)
   * Non résident : scan le disque, infecte et se barre
+* File infector viruses
+  * Infectes les programmes
+  * Typiquement des exe
+  * Souvent Memory Residents
+* Boot sector viruses
+  * Résidents par Nature
+  * Boot sector virus : s'attache au boot sector  
+* Master boot record viruses
+  * Similaire aux boot sector
+  * Peu d'info dessus, concernait surtout Windows NT qui bootaient plus quand infectés
+* Multipartites virus
+  * Les records + les exe, dégats particulièrement durs à réparer
+  * Les deux se re-infectent en permanence entre eux
 * Macro
-  * Macro : Excel / Outlook / Word qui permettent aux macro d'être imbriquées dans des mails / des docs
-  * On peut infecter des machines avec des macros
-  * D'où pas ouvrir des .doc de personnes pas connues
-* Boot sector
-  * Boot sector virus : ciblent spécialement le boot sector et/ou le master boot record
-* Email
-  * Email bah le classico quoi
+  * Au lieu d'infecter des exe, on infecte des données
+  * Le plus commun et le plus couteux au final
+  * Office 97
+  * Infecte Word, Excel, PowerPoint et Access
+  * Peut concerner potentiellement tous les programmes qui ont des languages de programmation internes
 
 ### Invisibilité (*Stealth techniques*)
 
@@ -92,6 +100,7 @@
   * Recherche de séquence de byte connues pour être des parties de virus
   * Si on trouve un pattern on cherche des autres fichiers parce que pas sûr que c'est un virus (faux positif)
   * Du coup, modification du code à chaque fichier infecté
+  * par contre le code qui se modifie lui même c'est rare et c'est suffisant pour qu'un antivirus tagge le truc comme suspicieux
 
 * Virus encryptés
 
@@ -99,7 +108,6 @@
   * en gardant le module d'encryption et une clé en clair stockée quelque part
   * Du coup le seul truc qui reste constante est le module de décryptage * (si le virus est encrypté avec une clé différente à chaque fichier infecté)
   * plus possible de les trouver avec des signatures mais possible de détecter le module d'encryption
-  * par contre le code qui se modifie lui même c'est rare et c'est suffisant pour qu'un antivirus tagge le truc comme suspicieux
   * Plus un module d'encryption / decryption dans une signature c'est un peu chelou
 
 * Polymorphique
@@ -110,16 +118,55 @@
   * Certains virus ralentissent l'infection, en s'empêchant de muter si il infecte un ordi qui contient déjà des copies de virus, du cccoup
   * ils ont besoin d'avoir un moteur polymorphique à l'intérieur
 
+* Métamorphisme
+  * Se réécrive entièrement à chaque fois
+  * Need un moteur de metamorphisme
+  * Par ex W32/Simmile est métamorphique mais sur ses 14'000 lignes d'assembleur, 90% sont dédiées au moteur
+
 ### Vulnérabilités
 
 * Bugs software
   * Quand c'est du fromage c'est la fête
 * Social engineering / Mauvaises pratiques de sécurité
-  * Pour se repliquer il doit obtenir la permission de s'executer et d'écrire dans la mémoire. ..
+  * Pour se repliquer il doit obtenir la permission de s'executer et d'écrire dans la mémoire...
   * Du coup ils essaient de s'injecter dans des executables légitimes
   * Extensions cachées
   * 5.66 % de toutes les vulnerabilités
 * Vulnérabilités OS
-  * todo
 
-  ### Défense
+### Défense
+
+* Antivirus
+  * detecte et éliminie les virus connus
+  * mise à jour duh (holes)
+  * n'empêche pas un virus de se transmettre
+  * deux grandes méthodes :
+    * liste de signatures, on regarde le contenu de la ram et du boot sector (zero day attack)
+    * algorithmes heuristiques basés sur les comportements communs de virus
+    * faux positifs possibles
+ * Backups lol
+ * Etre intelligent
+
+### Quelques virus notables
+
+* Tchernobyl
+  * Résident
+  * Première detection en juin 1998
+  * Ne sévit que le 26 août 1998, date anniversaire de Tchernobyl
+  * Versions de windows et jeux infectés circulaient sur internet
+  * Ecrase le premier megaoctet de chaque disque dur (MBR), tente d'effacer le BIOS
+  * Récupération compliquée
+  * Si BIOS effacé c'est mort, autant racheter une carte mère
+
+* MyDoom.A (2004)
+  * mail / kazaa
+  * s'envoie au carnet d'adresse et installe une backdoor
+  * envoie aussi à des adresses random -> on peut rediriger ces adresses vers une vraie après
+  * autorise la prise de contrôle (backdoor SHIMGAPI.DLL)
+
+* Cabir (2004)
+  * Sybian OS
+  * se propage par bluetooth
+  * CARIBE.SIS
+  * Affiche "Caribe" à l'écran, rien de dangereux
+  * Proof-of-concept
