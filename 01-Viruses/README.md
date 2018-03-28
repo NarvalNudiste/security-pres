@@ -92,6 +92,8 @@
   * Hashs de fichiers windows dans des db
   * Dans les vieilles versions, des hash crypto étaient directement placées dans windows
   * mais pourri parce que ces mêmes hashs stockés pouvaient être modifiés
+  * *cavity virus (Tchernobyl)*
+  * *kill antivirus avant (Conficker)*
 
 * Self-modification
 
@@ -101,7 +103,7 @@
   * Si on trouve un pattern on cherche des autres fichiers parce que pas sûr que c'est un virus (faux positif)
   * Du coup, modification du code à chaque fichier infecté
   * par contre le code qui se modifie lui même c'est rare et c'est suffisant pour qu'un antivirus tagge le truc comme suspicieux
-
+  
 * Virus encryptés
 
   * Pour éviter la détection on peut encrypter le corps du virus
