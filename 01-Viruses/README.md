@@ -81,6 +81,8 @@
   * La plupart des virus essayent de pas trop se faire gauler
   * Exemple bête mais sur ms-dos ils faisaient gaffe au fait que le "last modified" du fichier hôte soit pas touché
   * .. Mais ça marche pas hyper bien vu que certains antivirus gardent justement une trace de ces dates de façon cyclique
+  * *cavity virus (Tchernobyl)*
+  * *kill antivirus avant (Conficker)*
 * Read requests intercepts
   * une fois que l'infection est faite, difficile de clean le systeme
   * NTFS -> propriétaire donc antivirus est obligé d'envoyer une read request
@@ -92,8 +94,6 @@
   * Hashs de fichiers windows dans des db
   * Dans les vieilles versions, des hash crypto étaient directement placées dans windows
   * mais pourri parce que ces mêmes hashs stockés pouvaient être modifiés
-  * *cavity virus (Tchernobyl)*
-  * *kill antivirus avant (Conficker)*
 
 * Self-modification
 
